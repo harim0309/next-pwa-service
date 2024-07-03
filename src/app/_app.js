@@ -1,17 +1,9 @@
+// pages/_app.js
+
 import { useEffect } from "react";
 import { requestPermission } from "../firebase";
-import { Inter } from "next/font/google";
-import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata = {
-  title: "next-pwa-service",
-  description: "테스트로 만들어본 PWA",
-  manifest: "/manifest.json",
-};
-
-export default function RootLayout({ children }) {
+function MyApp({ Component, pageProps }) {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
@@ -29,9 +21,8 @@ export default function RootLayout({ children }) {
 
     requestPermission();
   }, []);
-  return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
+
+  return <Component {...pageProps} />;
 }
+
+export default MyApp;
