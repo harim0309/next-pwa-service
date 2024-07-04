@@ -1,7 +1,9 @@
-import Image from "next/image";
+import ServiceWorkerSetup from "./ServiceWorkerSetup";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen p-24"></main>
+    <main className="flex flex-col items-center justify-between min-h-screen p-24">
+      <ServiceWorkerSetup />
+    </main>
   );
 }
