@@ -11,15 +11,22 @@ const Index = () => {
 
   const log = (...args) => {
     logArr.push(args.join(" "));
+
+    console.log(...args);
+    const newList = logArr.concat(args.join(" "));
+    console.log(logArr);
+    setLogArr(newList);
   };
 
   const onMessageFCM = async () => {
+    log("onMessageFCM 실행");
     // 브라우저에 알림 권한을 요청합니다.
     if (
       "serviceWorker" in navigator &&
       "Notification" in window &&
       "PushManager" in window
     ) {
+      log("if문 통과");
       const permission = await Notification.requestPermission();
       log("permission:", permission);
       if (permission !== "granted") return;
@@ -64,18 +71,30 @@ const Index = () => {
     }
   };
 
-  useEffect(() => {
-    onMessageFCM();
-  }, []);
+  // useEffect(() => {
+  //   onMessageFCM();
+  // }, []);
 
   return (
     <div>
       <h1>hello world</h1>
-
-      <div className="p-2 border rounded brounded-md">
-        {logArr.map((log) => (
+      <button
+        className="bg-gray-300 rounded-lg px-[12px] py-[10px]"
+        onClick={() => onMessageFCM()}
+      >
+        onMessageFCM
+      </button>
+      <button
+        className="bg-gray-300 rounded-lg px-[12px] py-[10px]"
+        onClick={() => setLogArr([])}
+      >
+        log clear
+      </button>
+      <div className="p-2 border border-1">
+        {logArr.map((log, i) => (
           <p
-            className="p-1 border border-1"
+            className="p-1 my-1 border border-red-300 border-1"
+            key={i}
             onClick={() => {
               navigator.clipboard.writeText(log);
             }}
