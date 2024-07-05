@@ -20,12 +20,12 @@ const config = {
 firebase.initializeApp(config);
 
 self.addEventListener("push", function (event) {
-  const { title, message } = event.data.json().notification;
-  const options = {
-    body: message,
-  };
-  console.log(title, message);
-  event.waitUntil(self.registration.showNotification(title, options));
+  const notification = event.data.json().notification;
+
+  console.log("notification", notification);
+  event.waitUntil(
+    self.registration.showNotification(notification.title, notification)
+  );
 });
 
 const messaging = firebase.messaging();

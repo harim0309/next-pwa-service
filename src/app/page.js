@@ -7,9 +7,10 @@ import { getMessaging, onMessage, getToken } from "firebase/messaging";
 const Index = () => {
   const [currentToken, setCurrentToken] = useState("");
 
+  const [log, setLog] = useState("");
+
   const onMessageFCM = async () => {
     // 브라우저에 알림 권한을 요청합니다.
-
     if (
       "serviceWorker" in navigator &&
       "Notification" in window &&
@@ -61,10 +62,6 @@ const Index = () => {
 
   useEffect(() => {
     onMessageFCM();
-
-    setTimeout(() => {
-      onMessageFCM();
-    }, 3000);
   }, []);
 
   return (
