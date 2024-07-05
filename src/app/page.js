@@ -61,6 +61,10 @@ const Index = () => {
 
   useEffect(() => {
     onMessageFCM();
+
+    setTimeout(() => {
+      onMessageFCM();
+    }, 3000);
   }, []);
 
   return (
