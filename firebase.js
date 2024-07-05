@@ -86,3 +86,24 @@ export const setTokenHandler = async () => {
       console.error(error);
     });
 };
+
+export const getTokenHandler = async () => {
+  const messaging = getMessaging(app);
+  return await getToken(messaging, {
+    vapidKey:
+      "BMu2AMDJl3W3lAPcXMNgK2QJi_eiB-UZhKV-IOWGYgNsViAheiITE00VomclG8zR-alVTSDY_ZnLk7CJPnzvWVw",
+  })
+    .then(async (currentToken) => {
+      if (!currentToken) {
+        // 토큰 생성 불가시 처리할 내용, 주로 브라우저 푸시 허용이 안된 경우에 해당한다.
+        console.error("토큰 생성 불가");
+      } else {
+        // 토큰을 받았다면 여기서 supabase 테이블의 저장하면 됩니다.
+        console.log("currentToken", currentToken);
+        return currentToken;
+      }
+    })
+    .catch((error) => {
+      console.error("token error", error);
+    });
+};

@@ -3,7 +3,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { requestPermission } from "../../firebase";
+import { getTokenHandler } from "../../firebase";
 
 export default function ServiceWorkerSetup() {
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function ServiceWorkerSetup() {
           console.log("Service Worker registration failed:", err);
         });
 
-      requestPermission();
+      getTokenHandler();
     } else {
       console.error("Service workers are not supported by this browser.");
     }
