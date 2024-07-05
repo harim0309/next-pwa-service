@@ -2,10 +2,13 @@ import nextPwa from "next-pwa";
 
 const withPWA = nextPwa({
   dest: "public",
+  register: true,
+  skipWaiting: true,
 });
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   // 기존 Next.js 설정
 };
 
